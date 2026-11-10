@@ -44,3 +44,17 @@
     infrastructure); bumped axum lock 0.7.2 → 0.7.5 within "0.7" for graceful-shutdown API.
 11. Stage 10: final review — no stale references, dependency hygiene checked, 17-dimension
     comparison against the reference completed; deliberate deviations documented in DECISIONS.
+
+## Session 1 (shipping)
+
+12. User authorized commit/push/PR. `gh` authenticated (account alexted).
+13. Created branch `refactor/clean-architecture-adaptation`; committed the full refactoring
+    (33 files changed) as `2f8b9c0`; pushed to origin.
+14. First `gh pr create --base dev` FAILED: remote has no `dev` branch — it had been merged
+    into `main` via PR #1 as squash commit `5b58b33`; local `dev`/`origin/dev` refs were stale.
+    Verified `git diff a54e38c origin/main` is EMPTY (identical trees).
+15. Rebased our commit `--onto origin/main` (`5b58b33`) → `4369536`; result tree is
+    byte-identical to the fully verified pre-rebase state (`git diff 2f8b9c0 HEAD` empty);
+    force-pushed (`--force-with-lease`).
+16. Created PR #2 https://github.com/alexted/rust-grpc-app-template/pull/2 (base `main`,
+    33 changed files, OPEN) with the full architecture/verification summary.

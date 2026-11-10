@@ -5,8 +5,8 @@
 - Objective: refactor `/home/alex_goat/CLionProjects/rust-grpc-app-template` to the adapted Actix
   clean architecture (ref @ `8b82629`).
 - Phase: ALL STAGES COMPLETE (1–10). The task is implemented and verified.
-- Status: awaiting user review. No commits made (per restrictions). Working tree contains the
-  full refactoring as uncommitted changes.
+- Status: SHIPPED. Branch `refactor/clean-architecture-adaptation` (@ `4369536`), pushed to
+  origin, PR #2 open: https://github.com/alexted/rust-grpc-app-template/pull/2 (base `main`).
 
 ## B. Active task
 
@@ -61,7 +61,10 @@ None. If a new session is asked to continue, likely intents:
 
 ## I. Git and filesystem state
 
-- Branch: `dev`; HEAD: `a54e38c163d154ee34bdd64646b86d9b15f8e175` (unchanged — no commits made).
-- Working tree: full refactoring present as uncommitted changes; untracked: `.idea/`, `.ai-handoff/`,
-  new crate dirs (`container/`, `infrastructure/`), new test files.
-- Verify on resume: `git status --short` and compare against PROGRESS.md session-1 list.
+- Branch: `refactor/clean-architecture-adaptation `; HEAD: `4369536` (our refactoring commit on
+  top of `origin/main` = `5b58b33`). Pushed to origin; PR #2 open vs `main`.
+- IMPORTANT history note: remote `dev` was deleted (had been merged into `main` via PR #1 as
+  squash commit `5b58b33`); our commit was rebased `--onto origin/main` — result tree is
+  byte-identical to the pre-rebase state that was fully verified.
+- Local `dev`/`main` branches are stale leftovers; treat `origin/main` as the source of truth.
+- Working tree: clean except untracked `.idea/`.

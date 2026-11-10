@@ -46,10 +46,9 @@ All details are in the sibling handoff documents. Read them in this order:
 
 ## Current implementation stage
 
-ALL STAGES COMPLETE (1–10) — implemented, verified, and documented. The working tree holds the
-complete refactoring as uncommitted changes (no commits without authorization). Read
-`CURRENT_STATE.md` for the final architecture summary and `VERIFICATION.md` for executed
-results.
+ALL STAGES COMPLETE (1–10) — implemented, verified, documented AND shipped (with explicit user
+authorization): branch `refactor/clean-architecture-adaptation` @ `4369536` pushed to origin,
+PR #2 open vs `main`: https://github.com/alexted/rust-grpc-app-template/pull/2
 
 ## Mandatory continuation protocol (for a new AI session)
 
@@ -68,5 +67,5 @@ settings, logging, error vocabulary, thin transport adapters), dual-transport in
 preserved, all existing behavior preserved (routes, wire format, 400/INVALID_ARGUMENT mapping,
 byte-length validation), `cargo fmt --check`, `cargo check --workspace --all-targets`,
 `cargo test --workspace`, `cargo clippy --workspace --all-targets --all-features -- -D warnings`
-all pass (except pre-existing grpc macro warnings, to be eliminated or explicitly recorded),
+all pass (tonic-generated-code lints scoped-allowed on the generated `proto` modules only),
 handoff documents kept current.
