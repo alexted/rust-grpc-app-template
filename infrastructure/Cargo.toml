@@ -1,0 +1,8 @@
+[package]
+name = "my_service_infrastructure"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+dotenv = { workspace = true }
+env_logger = { workspace = true }

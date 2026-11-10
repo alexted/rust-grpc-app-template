@@ -4,6 +4,10 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+anyhow = { workspace = true }
+log = { workspace = true }
 tokio = { workspace = true }
+my_service_container = { workspace = true }
+my_service_infrastructure = { workspace = true }
 my_service_api_http = { workspace = true }
 my_service_api_grpc = { workspace = true }

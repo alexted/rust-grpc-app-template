@@ -1,0 +1,21 @@
+You are resuming an in-progress architectural refactoring. Do NOT restart the investigation.
+
+1. Read `.ai-handoff/START_HERE.md`, then `.ai-handoff/TASK_SPEC.md`, then
+   `.ai-handoff/CURRENT_STATE.md` (section H contains the exact NEXT ACTION).
+2. Skim `.ai-handoff/DECISIONS.md` (D-01..D-08 are final) and the matching stage in
+   `.ai-handoff/IMPLEMENTATION_PLAN.md`.
+3. Run `git -C /home/alex_goat/CLionProjects/rust-grpc-app-template status` and reconcile with
+   CURRENT_STATE.md section I. If the filesystem matches the checkpoint, proceed immediately to
+   the NEXT ACTION — do not re-plan, do not re-compare architectures, do not repeat completed work.
+4. Work in `/home/alex_goat/CLionProjects/rust-grpc-app-template` only. Never modify the Actix
+   reference repository or its worktree at
+   `/home/alex_goat/.local/share/opencode/worktree/41dece/witty-tiger` (read-only).
+5. Preserve existing behavior exactly: `POST /greeter/hello` → 200 `{"message":"Hello, {name}!"}`
+   (name ≥ 3 BYTES) / 400 `Invalid name length`; gRPC `greeter.Greeter/Hello` →
+   `INVALID_ARGUMENT` for short names; defaults 0.0.0.0:3000 (HTTP) and 0.0.0.0:50051 (gRPC).
+6. Do not commit or push. After each atomic operation run the relevant verification, then update
+   `.ai-handoff/CURRENT_STATE.md`, `.ai-handoff/PROGRESS.md`, and `.ai-handoff/VERIFICATION.md`.
+
+NOTE: As of the latest checkpoint ALL stages are complete and verified — see
+`.ai-handoff/CURRENT_STATE.md` section A/C. A new session should only continue if the user
+asks for changes or extensions; record any new task in CURRENT_STATE.md before starting.
