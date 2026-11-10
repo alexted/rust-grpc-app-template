@@ -4,8 +4,12 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-axum = "0.7"
+axum = { workspace = true }
 anyhow = { workspace = true }
 tokio = { workspace = true }
-serde = { workspace = true }
+my_service_container = { workspace = true }
 my_service_domain = { workspace = true }
+
+[dev-dependencies]
+serde_json = { workspace = true }
+tower = { workspace = true }

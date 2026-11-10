@@ -1,41 +1,25 @@
-use crate::{RouteError, RouteResult};
-use axum::{http::StatusCode, routing::post, Json};
-use my_service_domain::greeter as domain;
-use serde::{Deserialize, Serialize};
+//! The greeter endpoints: one route per operation, thin like the reference handlers.
 
-pub(crate) fn routes() -> axum::Router {
-    axum::Router::new().route("/hello", post(hello))
+use std::sync::Arc;
+
+use axum::extract::State;
+use axum::routing::post;
+use axum::{Json, Router};
+use my_service_container::Container;
+use my_service_domain::use_cases::{HelloRequest, HelloResponse};
+
+use crate::RouteError;
+
+/// Routes of the greeter service.
+pub(crate) fn routes() -> Router<Arc<Container>> {
+    Router::new().route("/hello", post(hello))
 }
 
-#[derive(Debug, Deserialize)]
-struct HelloRequest {
-    name: String,
-}
-
-impl From<HelloRequest> for domain::HelloInput {
-    fn from(input: HelloRequest) -> Self {
-        Self { name: input.name }
-    }
-}
-
-#[derive(Debug, Serialize)]
-struct HelloResponse {
-    message: String,
-}
-
-impl From<domain::HelloOutput> for HelloResponse {
-    fn from(output: domain::HelloOutput) -> Self {
-        Self {
-            message: output.message,
-        }
-    }
-}
-
-async fn hello(Json(request): Json<HelloRequest>) -> RouteResult<Json<HelloResponse>> {
-    let response = domain::hello(request.into()).map_err(|e| match e {
-        e @ domain::GreeterError::InvalidNameLength => {
-            RouteError::new(e).with_status(StatusCode::BAD_REQUEST)
-        }
-    })?;
-    Ok(Json(response.into()))
+/// Greet the requested name.
+async fn hello(
+    State(container): State<Arc<Container>>,
+    Json(request): Json<HelloRequest>,
+) -> Result<Json<HelloResponse>, RouteError> {
+    let response = container.hello_use_case.execute(request)?;
+    Ok(Json(response))
 }
